@@ -12,7 +12,7 @@ This is just a module intended to implement the minimax algorithm to interact te
 1. Clone the repository 
 ` git clone https://github.com/24neurons/2048-client `
 
-2. Use the test.py file to interact with the server
+2. Use the test.py file to interact with the server by typing `python3 test.py` in the terminal ( if you have python installed )
 
 ## Further instruction
 
