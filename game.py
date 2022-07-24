@@ -13,7 +13,7 @@ DEFAULT_SLEEP = 0.1
 SOCKET_BUFFER_SIZE = 1024
 
 
-class MoveClass: # pylint: disable=too-few-public-methods
+class MoveClass: # pylint: disable=too-few-public-methods,too-many-instance-attributes
     '''Represent moves that can be made (left, up, right, down)'''
     L, U, R, D = "left", "up", "right", "down"
     ALL_MOVES = [L, U, R, D]
@@ -21,9 +21,9 @@ class MoveClass: # pylint: disable=too-few-public-methods
     def __getitem__(self, idx: int) -> str:
         '''Return moves based on index given (left, up, right, down).'''
         return self.ALL_MOVES[idx]
-    
     def __iter__(self):
-        for i in self.ALL_MOVES: yield i
+        for i in self.ALL_MOVES:
+            yield i
 
 
 MOVES = MoveClass()
@@ -81,8 +81,7 @@ class RepeatRun(Thread):
         self.__function = function
         self.__stopped = stopped
 
-
-class ClientBuffer(deque):
+class ClientBuffer(deque): #pylint: disable=too-few-public-methods, len-as-condition
     '''The Buffer of a Client.
     Updates every few moments and push all data to a FIFO queue'''
 
@@ -95,7 +94,7 @@ class ClientBuffer(deque):
         self.__loop.daemon = True
         self.api_exception = None
 
-    def __append_line(self, line: str) -> None:
+    def __append_line(self, line: str) -> None: # pylint: disable=too-many-branches, len-as-condition
         '''Appends a line from buffer to the FIFO queue'''
         if "Invalid" in line:
             self.__stopped.set()
@@ -113,7 +112,7 @@ class ClientBuffer(deque):
             self.append(Result(line))
             self.__stopped.set()
         else:
-            if len(self) and isinstance(self[-1], Board) and not self[-1].full():
+            if len(self) > 0 and isinstance(self[-1], Board) and not self[-1].full():
                 self[-1].add_row(line)
             else:
                 self.append(Board(line))
@@ -132,7 +131,7 @@ class ClientBuffer(deque):
         self.__loop.start()
 
 
-class Client:
+class Client: #pylint: disable=too-many-arguments, len-as-condition
     '''A client, representing a server session'''
 
     def __raw_send(self, data: str) -> None:
@@ -161,7 +160,7 @@ class Client:
         self.__buffer.start_looping()
         self.warn = warn
 
-    def get_state(self) -> Union[Board , Game , Result]:
+    def get_state(self) -> Union[Board, Game, Result]:
         '''Get the first state from the FIFO queue.'''
         steps = int(DEFAULT_TIMEOUT/DEFAULT_SLEEP)
         for _ in range(steps):
