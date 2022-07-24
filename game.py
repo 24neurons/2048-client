@@ -1,7 +1,7 @@
 '''Library for interacting with 2048 server'''
 import socket
 from time import sleep
-from typing import Callable
+from typing import Callable, Union
 from collections import deque
 from threading import Thread, Event
 
@@ -161,7 +161,7 @@ class Client:
         self.__buffer.start_looping()
         self.warn = warn
 
-    def get_state(self) -> Board | Game | Result:
+    def get_state(self) -> Union[Board , Game , Result]:
         '''Get the first state from the FIFO queue.'''
         steps = int(DEFAULT_TIMEOUT/DEFAULT_SLEEP)
         for _ in range(steps):
