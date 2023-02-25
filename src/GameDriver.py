@@ -5,9 +5,13 @@ import time
 from Grid import Grid
 
 class GameDriver:    
-    def __init__(self):
+    def __init__(self, browser_name = "Chrome"):
         self.url = 'https://hczhcz.github.io/2048/20ez/'
-        self.driver = webdriver.Firefox()
+        self.browser_name = browser_name
+        if self.browser_name == "Chrome":
+            self.driver = webdriver.Chrome()
+        elif self.browser_name == "Firefox":
+            self.driver = webdriver.Firefox()
         self.driver.get(self.url)
         self.body = self.driver.find_elements_by_tag_name('body')[0]
         self.moves = {
