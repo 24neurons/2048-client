@@ -15,10 +15,14 @@ This is just a module intended to implement the minimax algorithm to interact te
 2. Install the requirements 
 ` pip install -r requirements.txt `
 3. Run the script 
-` python main.py --heuristic_function <heuristic_function>`
+` python main.py --heuristic_function <heuristic_function>` --browser <browser>`
 with heuristic functions in the list of
 `['greedy', 'empty', 'max_tile_weighted_smoothness', 'max_tile_weighted_smoothness_monotonicity']` 
 
+browser can be either `chrome` or `firefox`
+
+Example: 
+`python main.py --heuristic_function greedy --browser chrome`
 
 ## To-do list
 1. Add more heuristics
