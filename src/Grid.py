@@ -67,9 +67,12 @@ class Grid:
 
     def Optimizer_score(self):
         score = 0
-        for i in range(self.size):
-            for j in range(self.size):
-                score += self.matrix[i][j]
+        for row in range(self.size):
+            for col in range(self.size):
+                if row + 1 < self.size:
+                    score += self.matrix[row][col] * (self.matrix[row][col] == self.matrix[row + 1][col])
+                if col + 1 < self.size:
+                    score += self.matrix[row][col] * (self.matrix[row][col] == self.matrix[row][col + 1])
 
         return score
     def getMaxTile(self):

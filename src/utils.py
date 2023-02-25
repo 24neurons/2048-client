@@ -27,7 +27,7 @@ def Maximizer(gr: Grid, depth: int, heuristic_function : str):
         if len(possible_moves) == 0:
             return ans
         for x in possible_moves:
-            current_score = Minimizer(x[1], depth - 1)
+            current_score = Minimizer(x[1], depth - 1, heuristic_function=heuristic_function)
 
             if current_score > score:
                 score = current_score
@@ -59,7 +59,7 @@ def Minimizer(gr: Grid, depth: int, heuristic_function : str): #pylint: disable=
             return Heuristic(gr, heuristic_function=heuristic_function)
 
         for x in Possible_grids:
-            current_score = Maximizer(x, depth - 1)[1]
+            current_score = Maximizer(x, depth - 1,heuristic_function=heuristic_function)[1]
 
             if current_score < score:
                 score = current_score

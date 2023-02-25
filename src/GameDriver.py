@@ -1,14 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 import time
 from Grid import Grid
 
 class GameDriver:    
     def __init__(self):
         self.url = 'https://hczhcz.github.io/2048/20ez/'
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Firefox()
         self.driver.get(self.url)
-        self.body = self.driver.find_element_by_tag_name('body')
+        self.body = self.driver.find_elements_by_tag_name('body')[0]
         self.moves = {
             0: Keys.ARROW_UP,
             1: Keys.ARROW_DOWN,
@@ -27,6 +28,7 @@ class GameDriver:
             num = int(cls.split('tile tile-')[1].split(' ')[0])
             if num > matrix[row][col]:
                 matrix[row][col] = num
+            
         
         return Grid(matrix)
     
