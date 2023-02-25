@@ -33,17 +33,54 @@ class Grid:
         for i in range(self.size):
             print(self.matrix[i])
 
+    def getEmptyCells(self):
+        """
+        This method counts the number of the empty cells on the grid
+        Returns:
+            An int counting the number of empty cells on the grid
+        """
+
+        EmptyCells = 0
+
+        for row in range(self.size):
+            for col in range(self.size):
+                if self.matrix[row][col] == 0:
+                    EmptyCells += 1
+        
+        return EmptyCells
+    
+    def getUniformity(self):
+        """
+        This method returns the uniformity of the grid
+        Returns:
+            An int representing the uniformity of the grid
+        """
+        uniformity = 0
+        for row in range(self.size):
+            for col in range(self.size):
+                if row + 1 <= self.size:
+                    uniformity += (self.matrix[row][col] == self.matrix[row + 1][col])
+                if col + 1 <= self.size:
+                    uniformity += (self.matrix[row][col] == self.matrix[row][col + 1])
+        
+        return uniformity
+
     def Optimizer_score(self):
         score = 0
-        cnt = 0
         for i in range(self.size):
             for j in range(self.size):
-                cur = self.matrix[i][j]
-                score = score + cur
-                cnt = cnt + (cur == 0)
+                score += self.matrix[i][j]
 
-        return score + cnt
-
+        return score
+    def getMaxTile(self):
+        """
+        This method returns the maximum tile value on the grid
+        """
+        max_tile = 0
+        for i in range(self.size):
+            for j in range(self.size):
+                max_tile = max(max_tile, self.matrix[i][j])
+        return max_tile
     def notBlockedUp(self):
         # Loop through the column, and track if that column could be moved up or not
         # Method for moving one column up : 
@@ -334,6 +371,7 @@ class Grid:
         
         return Rightgraded
     
+        
     def getPossibleMaximizerMoves(self):
         """
         This method returns a list of all the possible moves that can be made on the grid
@@ -344,13 +382,13 @@ class Grid:
         Possible_grid = []
 
         if self.notBlockedLeft():
-            Possible_grid.append(["left", self.moveLeft()])
+            Possible_grid.append([2, self.moveLeft()])
         if self.notBlockedUp():
-            Possible_grid.append(["up" , self.moveUp()])
+            Possible_grid.append([0 , self.moveUp()])
         if self.notBlockedRight():
-            Possible_grid.append(["right" , self.moveRight()])
+            Possible_grid.append([3 , self.moveRight()])
         if self.notBlockedDown():
-            Possible_grid.append(["down" , self.moveDown()])
+            Possible_grid.append([1 , self.moveDown()])
         
         return Possible_grid
     
