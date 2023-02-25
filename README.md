@@ -22,10 +22,10 @@ This is just a module intended to implement the minimax algorithm to interact te
    with heuristic functions in the list of
    `['greedy', 'empty', 'max_tile_weighted_smoothness', 'max_tile_weighted_smoothness_monotonicity']` 
 
-   browser can be either `chrome` or `firefox`
+   browser can be either `Chrome` or `Firefox`
 
    Example: 
-   `python main.py --heuristic_function greedy --browser chrome`
+   `python main.py --heuristic_function greedy --browser Chrome`
 
 ## To-do list
 1. Add more heuristics
