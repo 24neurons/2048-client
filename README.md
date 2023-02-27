@@ -9,12 +9,12 @@ This is just a module intended to implement the minimax algorithm to interact te
 
 ## Usage 
 
-###1. Clone the repository 
+1. Clone the repository 
 ` git clone https://github.com/24neurons/2048-client `
 
-###2. Install the requirements 
+2. Install the requirements 
 ` pip install -r requirements.txt `
-###3. Run the script 
+3. Run the script 
  
    3.1 `cd src`
 
